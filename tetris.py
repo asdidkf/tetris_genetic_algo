@@ -76,6 +76,7 @@ class Tetris:
                     "desplaz": desplaz,
                     "tablero": nuevo,
                     "lineas": lineas_limpiadas,
+                    # features en orden fijo: [altura, lineas, huecos, bumpiness]
                     "features": self._features(nuevo, lineas_limpiadas),
                 })
         return jugadas
@@ -114,25 +115,21 @@ class Tetris:
 
         bumpiness = sum(abs(alturas[i] - alturas[i + 1]) for i in range(ANCHO - 1))
 
-        return {
-            "altura": sum(alturas),
-            "lineas": lineas,
-            "huecos": huecos,
-            "bumpiness": bumpiness,
-        }
+        # Orden fijo: [altura, lineas, huecos, bumpiness]
+        return [sum(alturas), lineas, huecos, bumpiness]
 
 
 def elegir_jugada(juego, pesos):
-    """pesos: dict con claves altura, lineas, huecos, bumpiness."""
+    """pesos: lista de 4 numeros en orden [altura, lineas, huecos, bumpiness]."""
     jugadas = juego.jugadas_posibles()
     if not jugadas:
         return None
-    return max(jugadas, key=lambda j: sum(pesos[k] * v for k, v in j["features"].items()))
+    return max(jugadas, key=lambda j: sum(p * f for p, f in zip(pesos, j["features"])))
 
 
 def jugar(pesos, max_piezas=300, seed=None):
-    """Juega una partida completa con estos pesos y devuelve el
-    fitness (numero de lineas completadas)."""
+    """Juega una partida completa con estos pesos (lista de 4 numeros)
+    y devuelve el fitness (numero de lineas completadas)."""
     juego = Tetris(seed=seed)
     while not juego.game_over and juego.piezas_colocadas < max_piezas:
         jugada = elegir_jugada(juego, pesos)
@@ -143,5 +140,6 @@ def jugar(pesos, max_piezas=300, seed=None):
 
 
 if __name__ == "__main__":
-    pesos = {"altura": -0.51, "lineas": 0.76, "huecos": -0.36, "bumpiness": -0.18}
+    # [altura, lineas, huecos, bumpiness]
+    pesos = [-0.51, 0.76, -0.36, -0.18]
     print("Lineas completadas:", jugar(pesos, seed=42))
