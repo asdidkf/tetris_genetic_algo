@@ -5,15 +5,16 @@ import visualization
 def inicializar(n):
     individuos = []
 
-    for i in range(n):
+    for _ in range(n):
         individuos.append([[random.uniform(-1,1), random.uniform(-1,1), random.uniform(-1,1), random.uniform(-1,1)], 0])
         
     return individuos
 
 def evaluar(individuos, generation):
-    for i in individuos:
-        i[1] = tetris.jugar(i[0], 1000, random.randint(1,1000))
-        #print(i)
+    for _ in range(3): 
+        for i in individuos:
+            i[1] = tetris.jugar(i[0], 1000, random.randint(1,1000))
+            #print(j)
 
     individuos.sort(key = lambda x:x[1])
 
