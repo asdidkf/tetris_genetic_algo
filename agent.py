@@ -19,3 +19,5 @@ def main():
     n = 100
     individuos = inicializar(n)
     evaluar(individuos)
+
+main()
