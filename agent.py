@@ -13,7 +13,7 @@ def inicializar(n):
 def evaluar(individuos, generation):
     for _ in range(3): 
         for i in individuos:
-            i[1] = tetris.jugar(i[0], 1000, random.randint(1,1000))
+            i[1] = tetris.jugar(i[0], 1000, random.randint(1,1000000))
             #print(j)
 
     individuos.sort(key = lambda x:x[1])
