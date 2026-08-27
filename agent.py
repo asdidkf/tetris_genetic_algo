@@ -15,6 +15,7 @@ def evaluar(individuos):
         #print(i)
 
     individuos.sort(key = lambda x:x[1])
+
     return(seleccionar(individuos))
 
 def seleccionar(individuos):
@@ -36,30 +37,30 @@ def reproduccion(individuos):
         random_value = random.randint(1,40)
         match random_value:
             case 1:
-                individuos.append([random.uniform(-1,1), 
+                individuos.append([[random.uniform(-1,1), 
                                    individuos[random.randint(0,9)][0][1], 
                                    individuos[random.randint(0,9)][0][2], 
-                                   individuos[random.randint(0,9)][0][3], 0])
+                                   individuos[random.randint(0,9)][0][3]], 0])
             case 2:
-                individuos.append([individuos[random.randint(0,9)][0][0], 
+                individuos.append([[individuos[random.randint(0,9)][0][0], 
                                    random.uniform(-1,1), 
                                    individuos[random.randint(0,9)][0][2], 
-                                   individuos[random.randint(0,9)][0][3], 0])
+                                   individuos[random.randint(0,9)][0][3]], 0])
             case 3:
-                individuos.append([individuos[random.randint(0,9)][0][0], 
+                individuos.append([[individuos[random.randint(0,9)][0][0], 
                                    individuos[random.randint(0,9)][0][1], 
                                    random.uniform(-1,1), 
-                                   individuos[random.randint(0,9)][0][3], 0])
+                                   individuos[random.randint(0,9)][0][3]], 0])
             case 4:
-                individuos.append([individuos[random.randint(0,9)][0][0], 
+                individuos.append([[individuos[random.randint(0,9)][0][0], 
                                    individuos[random.randint(0,9)][0][1], 
                                    individuos[random.randint(0,9)][0][2], 
-                                   random.uniform(-1,1), 0])
+                                   random.uniform(-1,1)], 0])
             case _:
-                individuos.append([individuos[random.randint(0,9)][0][0], 
+                individuos.append([[individuos[random.randint(0,9)][0][0], 
                                    individuos[random.randint(0,9)][0][1], 
                                    individuos[random.randint(0,9)][0][2], 
-                                   individuos[random.randint(0,9)][0][3], 0])
+                                   individuos[random.randint(0,9)][0][3]], 0])
 
     return individuos
 
@@ -70,7 +71,6 @@ def main():
 
     iter = 5
     for i in range(iter):
-        print(evaluar(individuos))
+        evaluar(individuos)
         
-
 main()
