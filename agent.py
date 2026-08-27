@@ -33,8 +33,8 @@ def seleccionar(individuos):
 
 def reproduccion(individuos):
     for _ in range(90):
-        random = random.rantint(1,40)
-        match random:
+        random_value = random.randint(1,40)
+        match random_value:
             case 1:
                 individuos.append([random.uniform(-1,1), 
                                    individuos[random.randint(0,9)][0][1], 
@@ -70,8 +70,7 @@ def main():
 
     iter = 5
     for i in range(iter):
-        evaluar(individuos)
-        print(individuos)
-    
+        print(evaluar(individuos))
+        
 
 main()
