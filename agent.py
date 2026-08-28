@@ -10,7 +10,7 @@ def inicializar(n):
         
     return individuos
 
-def evaluar(individuos, generation):
+def evaluar(individuos, generacion):
     for _ in range(3): 
         for i in individuos:
             i[1] = tetris.jugar(i[0], 1000, random.randint(1,1000000))
@@ -18,7 +18,7 @@ def evaluar(individuos, generation):
 
     individuos.sort(key = lambda x:x[1])
 
-    visualization.registrar(generation, individuos)
+    visualization.registrar(generacion, individuos)
 
     return(seleccionar(individuos))
 
