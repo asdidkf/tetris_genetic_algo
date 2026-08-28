@@ -40,3 +40,28 @@ def registrar(generacion, individuos, top=5):
     for lugar, (pesos, fitness) in enumerate(mejores, start=1):
         pesos_fmt = [round(p, 3) for p in pesos]
         print(f"  {lugar}. lineas={fitness}  pesos={pesos_fmt}")
+
+
+def guardar_mejor(individuos, archivo="mejor_pesos.txt"):
+    """Guarda en disco el mejor individuo visto en TODO el entrenamiento
+    (no solo el de esta generacion). Se llama igual que registrar():
+    espera individuos ordenados ascendente por fitness.
+
+    El archivo queda con 2 lineas:
+        fitness:<numero>
+        p1,p2,p3,p4
+    """
+    pesos, fitness = individuos[-1]
+
+    mejor_anterior = None
+    try:
+        with open(archivo) as f:
+            primera_linea = f.readline().strip()
+            mejor_anterior = float(primera_linea.split(":")[1])
+    except (FileNotFoundError, IndexError, ValueError):
+        mejor_anterior = None
+
+    if mejor_anterior is None or fitness >= mejor_anterior:
+        with open(archivo, "w") as f:
+            f.write(f"fitness:{fitness}\n")
+            f.write(",".join(str(p) for p in pesos) + "\n")
