@@ -6,15 +6,15 @@ Requiere pygame:
     pip install pygame
 
 Uso:
-    python visualizar.py
+    python showcase.py
         -> usa los pesos guardados en mejor_pesos.txt (generado por
            agent.py + visualization.guardar_mejor) si existe, si no
            usa unos pesos de ejemplo razonables.
 
-    python visualizar.py -0.51 0.76 -0.36 -0.18
+    python showcase.py -0.51 0.76 -0.36 -0.18
         -> usa esos 4 pesos directamente [altura, lineas, huecos, bumpiness]
 
-    python visualizar.py --seed 42 --fps 12
+    python showcase.py --seed 42 --fps 12
         -> semilla fija y velocidad de caida (pasos por segundo)
 
 Controles durante la partida:
